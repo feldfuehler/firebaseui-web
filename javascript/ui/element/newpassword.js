@@ -107,19 +107,32 @@ element.newPassword.getNewPasswordErrorElement = function() {
  * @return {boolean} True if fields are valid.
  * @private
  */
-element.newPassword.validate_ = function(newPasswordElement, errorElement) {
-  var password = element.getInputValue(newPasswordElement) || '';
-  if (!password) {
-    element.setValid(newPasswordElement, false);
-    element.show(errorElement,
-        firebaseui.auth.soy2.strings.errorMissingPassword().toString());
-    return false;
-  } else {
-    element.setValid(newPasswordElement, true);
-    element.hide(errorElement);
-    return true;
-  }
-};
+  element.newPassword.validate_ = function (newPasswordElement, errorElement) {
+    var password = element.getInputValue(newPasswordElement) || "";
+    if (!password) {
+      element.setValid(newPasswordElement, false);
+      element.show(
+        errorElement,
+        firebaseui.auth.soy2.strings.errorMissingPassword().toString()
+      );
+      return false;
+    } else {
+      const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+      if (!regex.test(password)) {
+        element.setValid(newPasswordElement, false);
+        element.show(
+          errorElement,
+          firebaseui.auth.soy2.strings.errorWeakPassword().toString()
+        );
+        return false;
+      }
+
+      element.setValid(newPasswordElement, true);
+      element.hide(errorElement);
+      return true;
+    }
+  };
 
 
 /**
