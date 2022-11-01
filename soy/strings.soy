@@ -133,6 +133,14 @@
 {/template}
 
 
+/** Error message for missing password. */
+{template .errorWeakPassword kind="text"}
+  {msg desc="Error message when the user entered a weak password."}
+    Das Passwort muss mindestens 8 Zeichen lang sein und mindestens einen Buchstaben sowie eine Zahl enthalten.
+  {/msg}
+{/template}
+
+
 /** Error message for too many account creation. */
 {template .errorTooManyRequestsCreateAccount kind="text"}
   {msg desc="Error message when too many accounts have been created from the same IP address."}
